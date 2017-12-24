@@ -39,6 +39,7 @@ import Author from './components/passport/AuthorizedClients.vue'
 import access from './components/passport/PersonalAccessTokens.vue'
 import sendcodefield from './components/SendCodeField.vue'
 //Vue.component('send-code-field', require('./components/SendCodeField.vue'));
+Vue.component('form-error', require('./components/FormError.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -46,6 +47,31 @@ const app = new Vue({
       Hello,
       clients,
       sendcodefield
-    }
-
+    },
+    data: {
+        dilixzt: {
+          da: '',
+          xzttext: ''
+        },
+        errors: [],
+        submitted: false
+      },
+      methods: {
+        createDilixzt: function () {
+          var self = this;
+          axios.post('/dilixzt/save', self.post).then(function(response) {
+            // form submission successful, reset post data and set submitted to true
+            self.post = {
+              da: '',
+              xzttext: '',
+            };
+            // clear previous form errors
+            self.errors = '';
+            self.submitted = true;
+          }).catch(function (error) {
+            // form submission failed, pass form errors to errors array
+            self.errors = error.response.data;
+          });
+        }
+      }
   })

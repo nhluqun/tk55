@@ -27,4 +27,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * 自定义用Passport授权登录：用户名+密码
+    * @param $username
+    * @return mixed 还不知道什么时候用
+    */
+    public function findforPassport($username){
+      return self::where('name',$username)->first();
+    }
 }

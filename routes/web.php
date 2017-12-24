@@ -19,7 +19,7 @@ Route::get('/clients',function(){
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/index','Api\IndexController@index');
+
 
 Auth::routes();
 
@@ -29,3 +29,21 @@ Route::post('/bar', function()
 {
 return 'Hello World';
 });
+
+Route::get('testCsrf',function(){
+    $csrf_field = csrf_field();
+    $html = <<<GET
+        <form method="POST" action="/testCsrf">
+            {$csrf_field}
+            <input type="submit" value="Test"/>
+        </form>
+GET;
+    return $html;
+});
+
+Route::post('testCsrf',function(){
+    return 'Success!';
+});
+
+Route::get('dilixzt/create', 'DilixztController@create');
+Route::post('dilixzt/save', 'DilixztController@save');
