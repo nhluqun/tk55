@@ -11,11 +11,11 @@ class ApiController extends Controller
     public function sendVerifyCode(Request $request)
   {
 
-      //         $this->validate($request, ['phone' => 'required|size:11|exists:users']);
-      //
-      // dispatch(new SendVerifyCode($request->phone));
-      //
-      // return ['success' => true];
-    echo '进来了';
+    $this->validate($request, ['phone' => 'required|size:11|exists:users']);
+
+      dispatch(new SendVerifyCode($request->phone));
+
+      return ['success' => true];
+  //  echo '进来了';
   }
 }
