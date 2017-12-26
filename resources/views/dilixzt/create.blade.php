@@ -7,15 +7,17 @@
     </div>
     <!--页面提交之后阻止刷新-->
     <form @submit.prevent="createDilixzt" method="POST">
+      <input type="hidden" name="_token" value="{{csrf_token()}}"/>
       <legend>创建选择题</legend>
       <!--如果xzttext字段验证失败则添加.has-error-->
       <div class="form-group" :class="{'has-error':errors.da}">
         <label>答案</label>
         <input type="text" name="da" class="form-control" v-model="dilixzt.da" value="{{ old('da') }}">
         <!--如果验证失败通过FormError组件显示错误信息-->
-        <form-error v-if="errors.da" :errors="errors">
+      <!--  <formerror v-if="errors.da" :errors="errors"> -->\
+      <formerror :errors="errors">
           @{{errors.da.join(',')}}
-        </form-error>
+        </formerror>
       </div>
       <!--如果xzttext字段验证失败则添加.has-error-->
       <div class="form-group" :class="{'has-error':errors.xzttext}">

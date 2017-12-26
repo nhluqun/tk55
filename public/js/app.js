@@ -1404,7 +1404,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_passport_PersonalAccessTokens_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_passport_PersonalAccessTokens_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_SendCodeField_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_SendCodeField_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_SendCodeField_vue__);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_FormError__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_FormError___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_FormError__);
+//i
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -1444,15 +1446,18 @@ window.Vue = __webpack_require__(38);
 
 
 
+
+
 //Vue.component('send-code-field', require('./components/SendCodeField.vue'));
-Vue.component('form-error', __webpack_require__(68));
+//Vue.component('form-error', require('./components/FormError.vue'));
 
 var app = new Vue({
   el: '#app',
   components: {
     Hello: __WEBPACK_IMPORTED_MODULE_2__components_Hello_vue___default.a,
     clients: __WEBPACK_IMPORTED_MODULE_3__components_passport_Clients_vue___default.a,
-    sendcodefield: __WEBPACK_IMPORTED_MODULE_6__components_SendCodeField_vue___default.a
+    sendcodefield: __WEBPACK_IMPORTED_MODULE_6__components_SendCodeField_vue___default.a,
+    FormError: FormError
   },
   data: {
     dilixzt: {

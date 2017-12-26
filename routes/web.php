@@ -46,4 +46,9 @@ Route::post('testCsrf',function(){
 });
 
 Route::get('dilixzt/create', 'DilixztController@create');
-Route::post('dilixzt/save', 'DilixztController@save');
+Route::patch('dilixzt/save', 'DilixztController@save');
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+    Route::get('/', 'HomeController@index');
+    Route::resource('dilixzts', 'DilixztController');
+});
