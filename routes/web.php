@@ -52,3 +52,4 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::get('/', 'HomeController@index');
     Route::resource('dilixzts', 'DilixztController');
 });
+Route::get('/posts', 'Api\PostController@index');

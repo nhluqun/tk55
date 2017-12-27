@@ -20,7 +20,7 @@
                         <input type="text" name="da" value="{{$dilixzt->da }}" class="form-control" required="required" placeholder="请输入标题">
                         <br>
                         {{ $dilixzt->xzttext }}
-                        <textarea name="xzttext" value="{{ $dilixzt->xzttext }}" rows="10" class="form-control" required="required" placeholder="请输入内容"></textarea>
+                        <textarea name="xzttext"  rows="10" class="form-control" required="required" placeholder="请输入内容">{{ $dilixzt->xzttext }}</textarea>
                         <br>
                         <button class="btn btn-lg btn-info">更新</button>
                     </form>

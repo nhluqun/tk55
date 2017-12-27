@@ -14,19 +14,19 @@
         <label>答案</label>
         <input type="text" name="da" class="form-control" v-model="dilixzt.da" value="{{ old('da') }}">
         <!--如果验证失败通过FormError组件显示错误信息-->
-      <!--  <formerror v-if="errors.da" :errors="errors"> -->\
-      <formerror :errors="errors">
+      <!--  <formerror v-if="errors.da" :errors="errors"> -->
+      <FormError :errors="errors">
           @{{errors.da.join(',')}}
-        </formerror>
+        </FormError>
       </div>
       <!--如果xzttext字段验证失败则添加.has-error-->
       <div class="form-group" :class="{'has-error':errors.xzttext}">
         <label>题干</label>
         <textarea name="xzttext" class="form-control" rows="5" v-model="dilixzt.xzttext">{{ old('xzttext') }}</textarea>
         <!--如果验证失败通过FormError组件显示错误信息-->
-        <form-error v-if="errors.xzttext" :errors="errors">
+        <FormError v-if="errors.xzttext" :errors="errors">
           @{{errors.xzttext.join(',')}}
-        </form-error>
+        </FormError>
       </div>
       <button type="submit" class="btn btn-primary">创建选择题</button>
     </form>

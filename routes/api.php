@@ -25,3 +25,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 //自已写的
 Route::middleware('auth:api')->get('/index','Api\IndexController@index');
+//Route::resource('/posts', 'Api\PostController');
+Route::get('/posts', 'Api\PostController@apiAll');
+Route::get('/posts/{id}', 'Api\PostController@apiFindPostById');
+Route::post('/posts', 'Api\PostController@apiCreatePost');
+Route::put('/posts/{id}', 'Api\PostController@apiUpdatePostById');
+Route::delete('/posts/{id}', 'Api\PostController@apiDeletePostById');

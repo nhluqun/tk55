@@ -38,7 +38,7 @@ import clients from './components/passport/Clients.vue'
 import Author from './components/passport/AuthorizedClients.vue'
 import access from './components/passport/PersonalAccessTokens.vue'
 import sendcodefield from './components/SendCodeField.vue'
-
+import Post from './components/Post.vue';
 import formerror from './components/FormError'
 //Vue.component('send-code-field', require('./components/SendCodeField.vue'));
 //Vue.component('form-error', require('./components/FormError.vue'));
@@ -46,10 +46,11 @@ import formerror from './components/FormError'
 const app = new Vue({
     el: '#app',
     components:{
-      Hello,
-      clients,
-      sendcodefield,
-      FormError
+      // Hello,
+      // clients,
+      // sendcodefield,
+ FormError,
+  Post
     },
     data: {
         dilixzt: {
