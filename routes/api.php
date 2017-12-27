@@ -31,3 +31,5 @@ Route::get('/posts/{id}', 'Api\PostController@apiFindPostById');
 Route::post('/posts', 'Api\PostController@apiCreatePost');
 Route::put('/posts/{id}', 'Api\PostController@apiUpdatePostById');
 Route::delete('/posts/{id}', 'Api\PostController@apiDeletePostById');
+
+Route::post('/dilixzt', 'DilixztController@store');

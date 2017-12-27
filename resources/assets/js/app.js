@@ -49,7 +49,7 @@ const app = new Vue({
       // Hello,
       // clients,
       // sendcodefield,
- FormError,
+ formerror,
   Post
     },
     data: {
@@ -63,7 +63,7 @@ const app = new Vue({
       methods: {
         createDilixzt: function () {
           var self = this;
-          axios.post('/dilixzt/save', self.post).then(function(response) {
+          axios.post('/dilixzt', self.post).then(function(response) {
             // form submission successful, reset post data and set submitted to true
             self.post = {
               da: '',

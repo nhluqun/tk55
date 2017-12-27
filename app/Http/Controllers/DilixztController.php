@@ -11,7 +11,7 @@ class DilixztController extends Controller
     public function create() {
   return view('dilixzt.create');
 }
-public function save(Request $request) {
+public function store(Request $request) {
   // 设置验证规则
   $this->validate($request, [
      'xzttext' => 'required',
