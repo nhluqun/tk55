@@ -4,8 +4,14 @@
         <li v-for="post in posts">
         @{{ post.title }}
         @{{ post.body }}
+        <button type="button" @click="modify(post)">修改</button>
+<button type="button" @click="remove(post.id)">删除</button>
         </li>
-
+<form >
+<input name='da' />
+<input name='xzttext' />
+<button type="button" @click="publish()">保存</button>
+</form>
     </div>
 </template>
 

@@ -32,4 +32,4 @@ Route::post('/posts', 'Api\PostController@apiCreatePost');
 Route::put('/posts/{id}', 'Api\PostController@apiUpdatePostById');
 Route::delete('/posts/{id}', 'Api\PostController@apiDeletePostById');
 
-Route::post('/dilixzt', 'DilixztController@store');
+Route::post('/dilixzts', 'DilixztController@apiCreateDilixzt');

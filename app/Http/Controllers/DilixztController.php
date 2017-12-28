@@ -11,15 +11,16 @@ class DilixztController extends Controller
     public function create() {
   return view('dilixzt.create');
 }
-public function store(Request $request) {
+
+public function apiCreateDilixzt(Request $request) {
   // 设置验证规则
   $this->validate($request, [
      'xzttext' => 'required',
      'da' => 'required'
    ]);
 $Dilixzt=new Dilixzt;
-   $Dilixzt->da=Input::get('da');
-   $Dilixzt->xzttext=Input::get('xzttext');
+   $Dilixzt->da=$request->input('da');
+   $Dilixzt->xzttext=$request->input('xzttext');
 
    if ($Dilixzt->save()) {
    			return Redirect::to('/');
