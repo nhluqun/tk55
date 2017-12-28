@@ -1473,9 +1473,10 @@ var app = new Vue({
   methods: {
     createDilixzt: function createDilixzt() {
       var self = this;
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/dilixzt', self.post).then(function (response) {
+      console.log(self.dilixzt);
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/dilixzts', self.dilixzt).then(function (response) {
         // form submission successful, reset post data and set submitted to true
-        self.post = {
+        self.dilixzt = {
           da: '',
           xzttext: ''
         };
@@ -1485,6 +1486,7 @@ var app = new Vue({
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array
         self.errors = error.response.data;
+        console.log(self.errors);
       });
     }
   }

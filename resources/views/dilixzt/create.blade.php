@@ -16,7 +16,7 @@
         <!--如果验证失败通过FormError组件显示错误信息-->
       <!--  <formerror v-if="errors.da" :errors="errors"> -->
       <formerror :errors="errors">
-          @{{errors.da}}
+          @{{errors['da']}}
         </formerror>
       </div>
       <!--如果xzttext字段验证失败则添加.has-error-->

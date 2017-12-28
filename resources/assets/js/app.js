@@ -62,10 +62,11 @@ const app = new Vue({
       },
       methods: {
         createDilixzt: function () {
-          var self = this;
-          axios.post('/api/dilixzt', self.post).then(function(response) {
+          let self = this;
+          console.log(self.dilixzt);
+          axios.post('/api/dilixzts', self.dilixzt).then(function(response) {
             // form submission successful, reset post data and set submitted to true
-            self.post = {
+            self.dilixzt = {
               da: '',
               xzttext: '',
             };
@@ -75,6 +76,7 @@ const app = new Vue({
           }).catch(function (error) {
             // form submission failed, pass form errors to errors array
             self.errors = error.response.data;
+            console.log(self.errors);
           });
         }
       }

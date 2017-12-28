@@ -23,9 +23,9 @@ $Dilixzt=new Dilixzt;
    $Dilixzt->xzttext=$request->input('xzttext');
 
    if ($Dilixzt->save()) {
-   			return Redirect::to('/');
+   			return Redirect('/');
    		} else {
-   			return Redirect::back()->withInput()->withErrors('保存失败！');
+   			return Redirect()->back()->withInput()->withErrors('保存失败！');
    		}
 }
 }
