@@ -1,42 +1,51 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import XianzhetiList from '@/components/XianzhetiList'
-import Clients from '@/components/passport/Clients.vue'
- import Author from '@/components/passport/AuthorizedClients.vue'
- import Access from '@/components/passport/PersonalAccessTokens.vue'
-Vue.use(Router)
-
-// const routes=[
-//   {path:'/',component:Clients},
-//   {path:'/Author',component:Author},
-//   {path:'/Access',component:Access}
-// ]
-
-const router= new Router({
-  mode:'history',
-  base:__dirname,
-  routes:[
+//import index from '../views/index.vue'
+const routers=[
     {
       path: '/',
-      name: 'XianzhetiList',
-      component:XianzhetiList
-    },
-    {
-      path: '/Clients',
-      name: 'Clients',
-      component:Clients
-    },
-    {
-      path: '/Author',
-      name: 'Author',
-      component:Author
-    },
-    {
-      path: '/Access',
-      name: 'Access',
-      component:Access
+      name: 'index',
+      component:resolve=> {
+        require(['@/views/index.vue'], resolve);
     }
+  },
+
+    { path:'/login',
+     name: 'login',
+     auth:false,
+     component:resolve=> {
+       require(['@/views/login.vue'], resolve);
+     }
+   },
+    {path:'/register',
+   	name: 'register',
+   	component:resolve=> {
+   		require(['@/views/register.vue'], resolve);
+   	},
+       auth: false
+   },
+   // {path:'/forgetpass',
+   // 	name: 'findpass',
+   // 	component(resolve) {
+   // 		require(['../views/findpass.vue'], resolve);
+   // 	},
+   //     auth: false
+   // },
+   // {path:'/account',
+   // 	name: 'account',
+   // 	component(resolve) {
+   // 		require(['../views/account.vue'], resolve);
+   // 	},
+   //     auth: true
+   // },
+
+  // {
+  //    path:'/usr/changepass',
+  //  	name: 'user.changepass',
+  //  component(resolve) {
+  //  	require(['../views/user/changepass.vue'], resolve);
+  //  },
+  //      auth: true
+  //  },
+
 ]
-})
-export default router
+
+export default routers
