@@ -1,8 +1,8 @@
 <template>
 <div>
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="邮箱" prop="email">
-    <el-input v-model="ruleForm.email"></el-input>
+  <el-form-item label="用户名" prop="username">
+    <el-input v-model="ruleForm.username"></el-input>
   </el-form-item>
 	<el-form-item label="密码" prop="password">
 		<el-input v-model="ruleForm.password"></el-input>
@@ -18,16 +18,20 @@
 <script>
 import server from '../config/api.js';
 import config from '../config/config.js';
+
+//import api from '../fetch/api';
+//import * as _ from '../util/tool';
+
   export default {
     data() {
       return {
         ruleForm: {
-          email: '',
+          username: '',
           password: ''
                 },
         rules: {
-          email: [
-            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+          username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
             {  }
           ],
           password: [
@@ -42,45 +46,35 @@ import config from '../config/config.js';
         this.$refs[formName].validate((valid) => {
           if (valid) {
 
-					/*this.$ajax.post(server.api.login, {
-						'grant_type': 'password',
-						'client_id': server.client.client_id,
-						'client_secret': server.client.client_secret,
-						'username': this.ruleForm.email,
-						'password': this.ruleForm.password,
-						'scope': '*' */
-
-            this.$ajax.post('/oauth/token', {
-  						'grant_type': 'password',
-  						'client_id': 4,
-  						'client_secret': 'dAi5wEtrSA4kOR9kzDD5hBVo2iWMO9HE68d4bzqE',
-  						'username': this.ruleForm.email,
-  						'password': this.ruleForm.password,
+          this.$ajax.post(server.api.login, {
+          						'grant_type': 'password',
+  						'client_id': server.client.client_id,
+  						'client_secret': server.client.client_secret,
+  						'username': this.ruleForm.username,
+              'password': this.ruleForm.password,
   						'scope': '*'
 					}).then((response) => {
-					this.$Message.success('登录成功！获取用户信息中...');
-						// 提交登录状态
-						this.button.text = '登录中...';
+          console.log('成功了');
+            console.log(response);
 						// 全局状态提交 - AccessToken
-						this.$store.commit('setAccessToken', response.body.access_token);
+						this.$store.commit('setAccessToken', response.data.access_token);
 						this.$store.commit('login');
 						// LocalStorage信息存储
 						localStorage.access_token = this.$store.state.access_token;
 						// 信息提示
-						this.$Message.success('登录成功！获取用户信息中...');
-						this.button.text = '获取用户信息中...';
+console.log(response.data.access_token);
+console.log(this.$store.state.access_token);
 						// 获取用户信息
-						this.$ajax.get(server.api.user, {
+			//this.$ajax.get(server.api.userDetails, {
+      this.$ajax.get('/api/userDetails', {
 							headers: {
 								'Authorization': 'Bearer ' + this.$store.state.access_token
 							}
 						}).then((response) => {
 							// Vuex全局状态提交 - LoginStatus
-							this.$store.commit('setUser', response.body.data);
-							this.button.text = '跳转中...';
-							// 信息提示
-							this.$Message.success('获取信息成功！');
-							// 跳转
+              console.log(response.data);
+							this.$store.commit('setUser', response.data.user);
+
 							setTimeout(() => {
 								this.$route.router.go({name: 'account'});
 							}, 1000);
@@ -89,15 +83,14 @@ import config from '../config/config.js';
 							//	loading: false,
 								text: '登录'
 							};
-							this.$Message.error('获取信息失败！');
+		console.log('获取信息失败！');
 						});
 					}, (error) => {
+          console.log('哪里错了？');
 						console.log(error);
-						//this.button.loading = false;
-						this.$Message.error(error.body.message);
 					})
           } else {
-            this.$Message.error('请填写有效信息！');
+          console.log('请填写有效信息！');
             return false;
           }
         });

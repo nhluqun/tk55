@@ -27,7 +27,7 @@ class UserController extends Controller
         }
             return response()->json($this->content, $status);
     }
-    public function details()
+    public function userDetails()
     {
       return response()->json(['user' => Auth::user()]);
     }

@@ -17,7 +17,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/login', 'UserController@login');
 });
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
-    Route::get('details', 'UserController@details');
+    Route::get('/userDetails', 'UserController@userDetails');
 });
 //系统自带路由
 Route::middleware('auth:api')->get('/user', function (Request $request) {

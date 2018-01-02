@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
 //没有这个中间件
       //  \App\Http\Middleware\EnableCrossRequestMiddleware::class,
-      \App\Http\Middleware\CrossHttp::class,
+  \App\Http\Middleware\CrossHttp::class,
     ];
 
     /**
@@ -38,11 +38,13 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         //    \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
 
         'api' => [
             'throttle:60,1',
             'bindings',
+
         ],
     ];
 

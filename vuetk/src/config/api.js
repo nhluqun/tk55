@@ -6,7 +6,7 @@ let api = {
 	//登录
 	login: config.host + '/oauth/token',
 	// 用户信息
-	user: config.host + config.prefix + '/user',
+	userDetails: config.host + config.prefix + '/userDetails',
 	// 更换密码
 	change_password: config.host + config.prefix + '/user/change_password',
 }

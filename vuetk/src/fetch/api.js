@@ -6,7 +6,7 @@ import * as _ from '../util/tool'
 // axios 配置
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL = 'http://localhost:4000/';
+axios.defaults.baseURL = 'http://localhost:8000/';
 
 //POST传参序列化
 axios.interceptors.request.use((config) => {
@@ -31,7 +31,7 @@ axios.interceptors.response.use((res) =>{
     return Promise.reject(error);
 });
 
-export function fetch(url, params) {
+export function fetch(url,params) {
     return new Promise((resolve, reject) => {
         axios.post(url, params)
             .then(response => {
@@ -50,9 +50,17 @@ export default {
      * 用户登录
      */
     Login(params) {
-        return fetch('/users/api/userLogin', params)
+        return fetch('/api/login', params)
     },
 
+
+GetToken(params){
+  return fetch('/oauth/token',params)
+},
+
+GetUserDetails(params){
+  return fetch('/api/UserDetails',params)
+},
     /**
      * 用户注册
      */
@@ -67,40 +75,7 @@ export default {
          return fetch('/users/api/registVerifiCode', {tellphone: tellphone})
      },
 
-    /**
-     * 获取约跑步列表
-     */
-    SportsList() {
-        return fetch('/api/sportList')
-    },
 
-    /**
-     * 获取约出行列表
-     */
-    TravelsList() {
-        return fetch('/api/travelList')
-    },
-
-    /**
-     * 获取约跑步详情
-     */
-    SportsDetail(id) {
-        return fetch('/api/sportDetail', {sportId: id})
-    },
-
-    /**
-     * 获取约出行详情
-     */
-    TravelsDetail(id) {
-        return fetch('/api/travelDetail', {travelId: id})
-    },
-
-    /**
-     * 获取出行活动点击次数
-     */
-    travelClicks(id) {
-        return fetch('/api/travelClickNum', {travelId: id})
-    },
 
     /**
      * 获取用户信息
@@ -109,31 +84,5 @@ export default {
         return fetch('/users/api/userInfo', {userId: id})
     },
 
-    /**
-     * 获取用户发布约行个数
-     */
-     getPubTotravelNum(id) {
-         return fetch('/users/api/getPubTotravelNum', {userId: id})
-     },
 
-     /**
-      * 获取用户自己发布的约行
-      */
-      getMyTravel(id) {
-          return fetch('/users/api/myTravel', {userId: id})
-      },
-
-    /**
-     * 发布约行活动
-     */
-    PostTravel(params) {
-        return fetch()
-    },
-
-    /**
-     * 获取全国JSON数据
-     */
-     getAddressJson() {
-         return fetch('/api/address')
-     }
 }
