@@ -16,8 +16,8 @@
 </div>
 </template>
 <script>
-import server from '../config/api';
-import config from '../config/config';
+import server from '../config/api.js';
+import config from '../config/config.js';
   export default {
     data() {
       return {
@@ -42,13 +42,21 @@ import config from '../config/config';
         this.$refs[formName].validate((valid) => {
           if (valid) {
 
-					this.$ajax.post(server.api.login, {
+					/*this.$ajax.post(server.api.login, {
 						'grant_type': 'password',
 						'client_id': server.client.client_id,
 						'client_secret': server.client.client_secret,
 						'username': this.ruleForm.email,
 						'password': this.ruleForm.password,
-						'scope': '*'
+						'scope': '*' */
+
+            this.$ajax.post('/oauth/token', {
+  						'grant_type': 'password',
+  						'client_id': 4,
+  						'client_secret': 'dAi5wEtrSA4kOR9kzDD5hBVo2iWMO9HE68d4bzqE',
+  						'username': this.ruleForm.email,
+  						'password': this.ruleForm.password,
+  						'scope': '*'
 					}).then((response) => {
 					this.$Message.success('登录成功！获取用户信息中...');
 						// 提交登录状态
