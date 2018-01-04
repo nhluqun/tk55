@@ -76,7 +76,7 @@ console.log(this.$store.state.access_token);
 							this.$store.commit('setUser', response.data.user);
 
 							setTimeout(() => {
-								this.$route.router.go({name: 'account'});
+								this.$router.push({name: 'index'});
 							}, 1000);
 						}, (error) => {
 							this.button = {
