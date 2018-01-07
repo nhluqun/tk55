@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Dilixzt;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\User;
 
 class DilixztController extends Controller
 {
@@ -62,4 +65,6 @@ public function destroy($id)
     Dilixzt::find($id)->delete();
     return redirect()->back()->withInput()->withErrors('删除成功！');
 }
+
+
     }
