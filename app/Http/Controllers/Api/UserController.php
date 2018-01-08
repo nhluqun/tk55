@@ -16,6 +16,15 @@ class UserController extends Controller
     {
       $this->content = array();
     }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+          //  'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+        ]);
+    }
     public function login()
     {
       if(Auth::attempt(['email' => request('email'), 'password' => request('password')]))
@@ -42,7 +51,7 @@ $myuser=Auth::user();
        $roles=$myuser->getRoleNames();
       // echo $roles;
       //return response()->json(['user' => Auth::user()]);
-      return response()->json(['user'=>$userArray,'roles'=>$roles,'avatar'=>'http://pimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif']);//应客户端的要求，这里加上了role
+      return response()->json(['user'=>$userArray,'roles'=>$roles,'avatar'=>'']);//应客户端的要求，这里加上了role
     }
 
     public function setRoles(){
@@ -56,31 +65,32 @@ $myuser=Auth::user();
 
      return 'ok!';
     }
+
     public function register(Request $request){
 
       {
-        $this->validator($request->all())->validate();
 
-        // event(new Registered($user = $this->create($request->all())));
-        //
-        // $this->login($user);
-        //
-        // return $this->registered($request, $user)
-        //                 ?: redirect($this->redirectPath());
-        if($user=$this->create($request->all())){
-          return '成功创建用户！';
-        }
-      }
+         $this->validator($request->all())->validate();
+//return 'come in';
+//         // event(new Registered($user = $this->create($request->all())));
+//         //
+//         // $this->login($user);
+//         //
+//         // return $this->registered($request, $user)
+//         //                 ?: redirect($this->redirectPath());
+//echo '验证通过';
+//echo $request->all();
+         if($user=$this->create($request->all())){
+      //   var_dump( $user);
+$this->content['msg']='成功创建用户！';
+$this->content['success']='true';
+$status='200';
+          return response()->json($this->content, $status);
+}
+    }
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -90,6 +100,7 @@ $myuser=Auth::user();
      */
     protected function create(array $data)
     {
+    //  echo 'create';
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
