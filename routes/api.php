@@ -21,6 +21,9 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
 });
 Route::get('/setRoles', 'Api\UserController@setRoles');
 Route::post('/register', 'Api\UserController@register');
+//Route::post('/register', 'Auth\RegisterController@register');
+//想利用现成的来注册，但是不成功。
+
 //系统自带路由
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
