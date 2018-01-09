@@ -19,7 +19,7 @@ class UserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
           //  'password' => 'required|string|min:6|confirmed',
             'password' => 'required|string|min:6',
@@ -90,7 +90,18 @@ $status='200';
     }
     }
 
-
+public function queryUserByName(Request $request){
+  $this->content['hasname']='no';
+  if(User::where('name','=',$request->input('name'))->get()){
+    $this->content['hasname']='yes';
+    }
+  else {
+    # code...
+    $this->content['hasname']='no';
+    }
+  $status='200';
+  return response()->json($this->content,$status);
+}
 
     /**
      * Create a new user instance after a valid registration.
