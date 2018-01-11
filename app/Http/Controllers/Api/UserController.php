@@ -22,7 +22,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
           //  'password' => 'required|string|min:6|confirmed',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
     public function login()
@@ -66,7 +66,7 @@ $myuser=Auth::user();
      return 'ok!';
     }
 
-    public function register(Request $request){
+    public function Aregister(Request $request){
 
       {
 
