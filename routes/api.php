@@ -18,9 +18,11 @@ Route::group(['namespace' => 'Api'], function () {
 });
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
     Route::get('/userDetails', 'UserController@userDetails');
+
 });
 Route::get('/setRoles', 'Api\UserController@setRoles');
 Route::post('/Aregister', 'Api\UserController@Aregister');
+Route::resource('/dilixzts','Api\DilixztController');
 //Route::post('/register', 'Auth\RegisterController@register');
 //想利用现成的来注册，但是不成功。//能够注册成功，但是重定向/home
 //Route::get('/queryUserByName', 'Api\UserController@queryUserByName');

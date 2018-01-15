@@ -83,7 +83,6 @@ $myuser=Auth::user();
          if($user=$this->create($request->all())){
       //   var_dump( $user);
 $this->content['msg']='成功创建用户！';
-$this->content['success']='true';
 $status='200';
           return response()->json($this->content, $status);
 }
