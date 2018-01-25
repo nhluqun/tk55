@@ -8,59 +8,34 @@ use Validator;
 
 class fileUpload extends Controller
 {
-  public function upload(Request $request){
-    if($request->isMethod('post')){
-                $all = $request->all();
-                $rules = [
-                    'upFile'=>'required',
-                ];
-                $messages = [
-                    'upFile.required'=>'请选择要上传的文件'
-                ];
-                $validator = Validator::make($all,$rules,$messages);
-                if($validator->fails()){
-                    return back()->withErrors($validator);
-                }
-                //获取上传文件的大小
-                $size = $request->file('upFile')->getSize();
-                //这里可根据配置文件的设置，做得更灵活一点
-                if($size > 2*1024*1024){
-                    return back()->with('errors','上传文件不能超过2M');
-                }
-                //文件类型
-                $mimeType = $request->file('upFile')->getMimeType();
-                //这里根据自己的需求进行修改
-                if($mimeType != 'image/png'){
-                    return back()->with('errors','只能上传png格式的图片');
-                }
-                //扩展文件名
-                $ext = $request->file('upFile')->getClientOriginalExtension();
-                //判断文件是否是通过HTTP POST上传的
-                $realPath = $request->file('upFile')->getRealPath();
+  public function upfile(Request $request) {
+         
+     if (!$request->hasFile('file')) {
+       return response()->json([], 500, '无法获取上传文件');
+     }
+     $file = $request->file('file');
 
-                if(!$realPath){
-                    return back()->with('errors','非法操作');
-                }
+     if ($file->isValid()) {
+       // 获取文件相关信息
+       $originalName = $file->getClientOriginalName(); // 文件原名
+       $ext = $file->getClientOriginalExtension();   // 扩展名
+       $realPath = $file->getRealPath();  //临时文件的绝对路径
+       $type = $file->getClientMimeType();   // image/jpeg
 
-                //创建以当前日期命名的文件夹
-                $today = date('Y-m-d');
-                //storage_path().'/app/uploads/' 这里根据 /config/filesystems.php 文件里面的配置而定
-                //$dir = str_replace('\\','/',storage_path().'/app/uploads/'.$today);
-                $dir = storage_path().'/app/uploads/'.$today;
-                if(!is_dir($dir)){
-                    mkdir($dir);
-                }
+       // 上传文件
+       $filename = date('Ymd/His');
+       // 使用我们新建的uploads本地存储空间（目录）
+       $path = $file->store($filename, 'images');
+       return response()->json([
+         'status_code' => 200,
+         'message' => 'success',
+         'imagepath' => $path,
+         'originalName' => $originalName,
+         'filename'=>$filename,
+       ]);
 
-                //上传文件
-                $filename = uniqid().'.'.$ext;//新文件名
-                if(Storage::disk('uploads')->put($today.'/'.$filename,file_get_contents($realPath))){
-                    dd('上传成功');
-                }else{
-                    dd('上传失败');
-                }
-            }else{
-                return view('test.index');
-            }
-        }
-  }
+     } else {
+       return response()->json([], 500, '文件未通过验证');
+     }
+   }
 }

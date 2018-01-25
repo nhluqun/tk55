@@ -55,8 +55,8 @@ $myuser=Auth::user();
     }
 
     public function setRoles(){
-     //  Role::create(['name' => 'admin']);
-         Role::create(['guard_name' => 'api','name' => 'teacher']);
+       Role::create(['guard_name' => 'api','name' => 'admin']);
+        // Role::create(['guard_name' => 'api','name' => 'teacher']);
       //Permission::create(['guard_name' => 'api','name' => 'edit articles']);
 
      //return response()->json(['msg'=>'成功加了adminteacher角色']);

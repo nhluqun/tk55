@@ -22,6 +22,11 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
 });
 Route::get('/setRoles', 'Api\UserController@setRoles');
 Route::post('/Aregister', 'Api\UserController@Aregister');
+Route::post('/upfile', 'fileUpload@upfile');
+Route::get('/getKeshis', 'Api\KeshiController@getKeshis');
+Route::get('/ppttest', 'Api\pptController@test');
+//Route::post('/dilixzts/update', 'Api\DilixztController@update');
+//Route::get('/dilixzts/del/{id}', 'Api\DilixztController@destroy');
 Route::resource('/dilixzts','Api\DilixztController');
 //Route::post('/register', 'Auth\RegisterController@register');
 //想利用现成的来注册，但是不成功。//能够注册成功，但是重定向/home
@@ -40,4 +45,4 @@ Route::post('/posts', 'Api\PostController@apiCreatePost');
 Route::put('/posts/{id}', 'Api\PostController@apiUpdatePostById');
 Route::delete('/posts/{id}', 'Api\PostController@apiDeletePostById');
 
-Route::post('/dilixzts', 'DilixztController@apiCreateDilixzt');
+//Route::post('/dilixzts', 'DilixztController@apiCreateDilixzt');
