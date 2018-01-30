@@ -16,10 +16,21 @@ class DilixztController extends Controller
         $this->content = array();
       }
       public function index(Request $request){
-        $keyword=$request->input('criteria');
-        dd($keyword);
+        //  $keyword=$request->input('criteria.gjz');
+          //$keshied=$request->input('criteria.keshiid'];
+$criteria=$request->input('criteria');
+        if (isset($request['criteria']['gjz']) )
+            $keyword=$criteria['gjz'];
+          else $keyword='';
+        //dd($keyword);
         $pagesize=$request->input('pagesize');
-        $dilixzts=Dilixzt::where('xzt','like','%'.$keyword.'%')->paginate($pagesize);
+        $dilixzts=Dilixzt::where('xzt','like','%'.$keyword.'%')
+            ->where(function($query) use($request) {
+                if (isset($request['criteria']['keshiid']) && $request['criteria']['keshiid'] )
+                {
+                    $query->where('keshiid', '=', $request['criteria']['keshiid']);
+                }
+            })->paginate($pagesize);
         //$totalCount=Dilixzt::All()->Count();
           return response()->json(['pageDilixzts'=>$dilixzts], 200);
       }
