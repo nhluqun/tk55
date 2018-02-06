@@ -15,25 +15,27 @@ class DilixztController extends Controller
       {
         $this->content = array();
       }
-      public function index(Request $request){
-        //  $keyword=$request->input('criteria.gjz');
-          //$keshied=$request->input('criteria.keshiid'];
-$criteria=$request->input('criteria');
-        if (isset($request['criteria']['gjz']) )
-            $keyword=$criteria['gjz'];
-          else $keyword='';
-        //dd($keyword);
+    public function search(Request $request){
+        $requests=$request;
         $pagesize=$request->input('pagesize');
+
+        if (isset($requests['gjz']) )
+            $keyword=$requests['gjz'];
+        else $keyword='';
+
         $dilixzts=Dilixzt::where('xzt','like','%'.$keyword.'%')
-            ->where(function($query) use($request) {
-                if (isset($request['criteria']['keshiid']) && $request['criteria']['keshiid'] )
+            ->where(function($query) use($requests) {
+                if(isset($requests['keshi']) && $requests['keshi'])
                 {
-                    $query->where('keshiid', '=', $request['criteria']['keshiid']);
+                    $query->where('keshiid', '=', $requests['keshi']);
                 }
-            })->paginate($pagesize);
-        //$totalCount=Dilixzt::All()->Count();
-          return response()->json(['pageDilixzts'=>$dilixzts], 200);
-      }
+            })->get();
+        return response()->json(['pageDilixzts'=>$dilixzts], 200);
+
+    }
+   public function index(Request $request)
+      {
+                }
 
     public function store(Request $request) {
       $this->validate($request, [
@@ -47,7 +49,11 @@ $criteria=$request->input('criteria');
           $Dilixzt->tu1url=$request->input('tu1url');
           $Dilixzt->tu2url=$request->input('tu2url');
           $Dilixzt->xzttext=$request->input('xzttext');
-
+            $Dilixzt->tg=$request->input('tg');
+        $Dilixzt->a=$request->input('a');
+        $Dilixzt->b=$request->input('b');
+        $Dilixzt->c=$request->input('c');
+        $Dilixzt->d=$request->input('d');
           if ($Dilixzt->save()) {
             $this->content['msg']='成功创建一道选择题';
             $this->content['status']='200';
@@ -80,7 +86,11 @@ $criteria=$request->input('criteria');
         $Dilixzt->tu1url=$request->input('tu1url');
         $Dilixzt->tu2url=$request->input('tu2url');
         $Dilixzt->xzttext=$request->input('xzttext');
-
+          $Dilixzt->tg=$request->input('tg');
+          $Dilixzt->a=$request->input('a');
+          $Dilixzt->b=$request->input('b');
+          $Dilixzt->c=$request->input('c');
+          $Dilixzt->d=$request->input('d');
         $ok = $Dilixzt->save();
         if (!$ok) $msg = '更新失敗！';
     } else {
@@ -121,4 +131,39 @@ public function destroy(Request $request,$id)
     }
 
 }
+public function fk(){
+        $dilixzts=Dilixzt::all();
+       foreach ($dilixzts as $dilixzt) {
+//           $str = $dilixzt->xzt;
+//           $strall = preg_split('/[\n\r\t\s;&nbsp][ABCD]/', $str);
+//           if (count($strall) == 5) {
+//               $dilixzt->tg = $strall[0];
+//               $dilixzt->a = $strall[1];
+//               $dilixzt->b = $strall[2];
+//               $dilixzt->c = $strall[3];
+//               $dilixzt->d = $strall[4];
+//               $dilixzt->save();
+           //去空格
+           $dilixzt->xzt=preg_replace('/[&nbsp;]/','',$dilixzt->xzt);
+           $dilixzt->tg=preg_replace('/[&nbsp;]/','',$dilixzt->tg);
+           $dilixzt->a=preg_replace('/[&nbsp;]/','',$dilixzt->a);
+           $dilixzt->b=preg_replace('/[&nbsp;]/','',$dilixzt->b);
+           $dilixzt->c=preg_replace('/[&nbsp;]/','',$dilixzt->c);
+           $dilixzt->d=preg_replace('/[&nbsp;]/','',$dilixzt->d);
+           $dilixzt->save();
+           }
+       }
+//    $dilixzt=Dilixzt::find(1426);
+//                $str=$dilixzt->xzt;
+//           $strall=preg_split('/[\n\r\t\s;&nbsp][ABCD]/',$str);
+//           if(count($strall)==5) {
+//               $dilixzt->tg = $strall[0];
+//               $dilixzt->a = $strall[1];
+//               $dilixzt->b = $strall[2];
+//               $dilixzt->c = $strall[3];
+//               $dilixzt->d = $strall[4];
+//               $dilixzt->save();
+//           }
+
+  //      }
 }
