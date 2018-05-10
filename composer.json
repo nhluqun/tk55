@@ -11,7 +11,8 @@
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
         "spatie/laravel-permission": "^2.7",
-        "phpoffice/phppresentation": "dev-master"
+        "phpoffice/phppresentation": "dev-master",
+        "phpoffice/phpword": "v0.13.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

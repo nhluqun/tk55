@@ -47,8 +47,10 @@ Route::post('testCsrf',function(){
 
 Route::get('/dilixzt/create', 'DilixztController@create');
 //Route::post('/dilixzt', 'DilixztController@store');
+Route::get('/word/createWord', 'wordController@createWord');
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+
+Route::group(array('middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'), function() {
     Route::get('/', 'HomeController@index');
     Route::resource('dilixzts', 'DilixztController');
 });
