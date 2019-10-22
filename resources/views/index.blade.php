@@ -5,18 +5,8 @@
     <title>myvue</title>
 </head>
 <body>
-    <div id="app">
-      <Hello></Hello>
-
-<sendcodefield></sendcodefield>
-
-    </div>
-
-
-
-
-
-
-    <script src="{{ mix('js/app.js') }}"></script>
+  <p>是不是首页1</p>
+    <div id="app">   </div>
+ <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
