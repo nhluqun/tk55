@@ -13,15 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 //测试路由
-Route::group(['namespace' => 'Api'], function () {
-    Route::post('/login', 'UserController@login');
-});
+//Route::group(['namespace' => 'Api'], function () {
+  //  Route::post('/login', 'UserController@login');
+ //   Route::post('/login', 'UserController@loginbyname');
+//});
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
     Route::get('/userDetails', 'UserController@userDetails');
 
 });
 Route::get('/setRoles', 'Api\UserController@setRoles');
 Route::post('/Aregister', 'Api\UserController@Aregister');
+Route::post('/queryUserByName', 'Api\UserController@queryUserByName');
+
 Route::post('/upfile', 'fileUpload@upfile');
 Route::get('/getKeshis', 'Api\KeshiController@getKeshis');
 Route::get('/ppttest', 'Api\pptController@test');
