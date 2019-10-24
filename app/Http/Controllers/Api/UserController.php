@@ -95,8 +95,14 @@ $status='200';
 
 public function queryUserByName(Request $request){
   $this->content['hasname']='no';
-  if(User::where('name','=',$request->input('name'))->get()){
+ // echo $request->input('name');
+    $data=User::where('name','=',$request->input('name'))->get();
+   //var_dump($data);
+   // echo $data->first();
+
+  if(!$data->isEmpty()){  //如果不为空
     $this->content['hasname']='yes';
+   // echo 'yes';
     }
   else {
     # code...

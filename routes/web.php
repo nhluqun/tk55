@@ -55,3 +55,5 @@ Route::group(array('middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => '
     Route::resource('dilixzts', 'DilixztController');
 });
 Route::get('/posts', 'Api\PostController@index');
+
+Route::get('/queryUserByName', 'Api\UserController@queryUserByName');

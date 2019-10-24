@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
 });
 Route::get('/setRoles', 'Api\UserController@setRoles');
 Route::post('/Aregister', 'Api\UserController@Aregister');
-Route::post('/queryUserByName', 'Api\UserController@queryUserByName');
+Route::get('/queryUserByName', 'Api\UserController@queryUserByName');//设成post时，请求方法不被允许
 
 Route::post('/upfile', 'fileUpload@upfile');
 Route::get('/getKeshis', 'Api\KeshiController@getKeshis');
