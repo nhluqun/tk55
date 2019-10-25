@@ -95,6 +95,7 @@ $status='200';
 
 public function queryUserByName(Request $request){
   $this->content['hasname']='no';
+  //  $this->content['hasname']=false;
  // echo $request->input('name');
     $data=User::where('name','=',$request->input('name'))->get();
    //var_dump($data);
@@ -102,11 +103,8 @@ public function queryUserByName(Request $request){
 
   if(!$data->isEmpty()){  //如果不为空
     $this->content['hasname']='yes';
+    //  $this->content['hasname']=true;
    // echo 'yes';
-    }
-  else {
-    # code...
-    $this->content['hasname']='no';
     }
   $status='200';
   return response()->json($this->content,$status);
